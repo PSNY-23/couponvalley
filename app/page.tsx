@@ -17,12 +17,12 @@ export default function Home() {
 
       <LogoCloud />
 
-      <Suspense fallback={<BrandSectionSkeleton />}>
-        <BrandSection />
-      </Suspense>
-
       <Suspense fallback={<TopCouponsSkeleton />}>
         <TopCoupons />
+      </Suspense>
+
+      <Suspense fallback={<BrandSectionSkeleton />}>
+        <BrandSection />
       </Suspense>
 
       <Suspense fallback={<TopShopsSkeleton />}>

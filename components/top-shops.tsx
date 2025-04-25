@@ -1,27 +1,39 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { ChevronRight, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { useLanguage } from "@/components/language-provider"
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ChevronRight,
+  Star,
+  ShoppingBag,
+  Store,
+  ShoppingCart,
+  Monitor,
+  Shirt,
+  Footprints,
+  Apple,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/components/language-provider";
 
 type Shop = {
-  id: number
-  name: string
-  logo: string
-  rating: number
-  activeDeals: number
-  slug: string
-  featured?: boolean
-}
+  id: number;
+  name: string;
+  logo?: string;
+  icon: string;
+  rating: number;
+  activeDeals: number;
+  slug: string;
+  featured?: boolean;
+};
 
 const shops: Shop[] = [
   {
     id: 1,
     name: "Amazon",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "🛍️",
     rating: 4.8,
     activeDeals: 245,
     slug: "amazon",
@@ -30,7 +42,8 @@ const shops: Shop[] = [
   {
     id: 2,
     name: "Walmart",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "🏪",
     rating: 4.5,
     activeDeals: 187,
     slug: "walmart",
@@ -39,7 +52,8 @@ const shops: Shop[] = [
   {
     id: 3,
     name: "Target",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "🎯",
     rating: 4.6,
     activeDeals: 156,
     slug: "target",
@@ -47,7 +61,8 @@ const shops: Shop[] = [
   {
     id: 4,
     name: "Best Buy",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "💻",
     rating: 4.7,
     activeDeals: 132,
     slug: "best-buy",
@@ -55,7 +70,8 @@ const shops: Shop[] = [
   {
     id: 5,
     name: "Macy's",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "👔",
     rating: 4.4,
     activeDeals: 98,
     slug: "macys",
@@ -63,7 +79,8 @@ const shops: Shop[] = [
   {
     id: 6,
     name: "Nike",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "👟",
     rating: 4.9,
     activeDeals: 76,
     slug: "nike",
@@ -72,7 +89,8 @@ const shops: Shop[] = [
   {
     id: 7,
     name: "Adidas",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "👟",
     rating: 4.7,
     activeDeals: 65,
     slug: "adidas",
@@ -80,15 +98,16 @@ const shops: Shop[] = [
   {
     id: 8,
     name: "Apple",
-    logo: "/placeholder.svg?height=100&width=100",
+    // logo: "/placeholder.svg?height=100&width=100",
+    icon: "🍎",
     rating: 4.9,
     activeDeals: 43,
     slug: "apple",
   },
-]
+];
 
 export default function TopShops() {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   return (
     <section className="space-y-4">
@@ -114,16 +133,24 @@ export default function TopShops() {
               </Badge>
             )}
             <div className="flex-shrink-0">
-              <Image
-                src={shop.logo || "/placeholder.svg"}
-                alt={shop.name}
-                width={48}
-                height={48}
-                className="h-12 w-12 rounded-full object-contain"
-              />
+              {shop.logo ? (
+                <Image
+                  src={shop.logo}
+                  alt={shop.name}
+                  width={100}
+                  height={100}
+                  className="h-12 w-12 rounded-full object-contain"
+                />
+              ) : (
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-2xl">
+                  {shop.icon}
+                </div>
+              )}
             </div>
             <div className="flex-1">
-              <h3 className="font-medium group-hover:text-primary">{shop.name}</h3>
+              <h3 className="font-medium group-hover:text-primary">
+                {shop.name}
+              </h3>
               <div className="flex items-center gap-1">
                 <div className="flex items-center">
                   <Star className="h-3 w-3 fill-primary text-primary" />
@@ -138,5 +165,5 @@ export default function TopShops() {
         ))}
       </div>
     </section>
-  )
+  );
 }

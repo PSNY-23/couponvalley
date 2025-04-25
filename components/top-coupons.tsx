@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Check, ChevronRight, Copy } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { useLanguage } from "@/components/language-provider"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Check, ChevronRight, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/components/language-provider";
 
 type Coupon = {
-  id: number
-  code: string
-  title: string
-  description: string
-  brandName: string
-  brandLogo: string
-  expiryDate: string
-  usedCount: number
-  slug: string
-}
+  id: number;
+  code: string;
+  title: string;
+  description: string;
+  brandName: string;
+  brandLogo: string;
+  expiryDate: string;
+  usedCount: number;
+  slug: string;
+};
 
 const coupons: Coupon[] = [
   {
@@ -87,35 +87,108 @@ const coupons: Coupon[] = [
     usedCount: 876,
     slug: "homestyle-home25",
   },
-]
+  {
+    id: 7,
+    code: "FITNESS20",
+    title: "20% Off Fitness Equipment",
+    description: "Save 20% on all fitness equipment",
+    brandName: "FitLife",
+    brandLogo: "/placeholder.svg?height=100&width=100",
+    expiryDate: "2025-08-15",
+    usedCount: 654,
+    slug: "fitlife-fitness20",
+  },
+  {
+    id: 8,
+    code: "GAMING15",
+    title: "15% Off Gaming Accessories",
+    description: "Get 15% off on all gaming accessories",
+    brandName: "GameZone",
+    brandLogo: "/placeholder.svg?height=100&width=100",
+    expiryDate: "2025-07-20",
+    usedCount: 789,
+    slug: "gamezone-gaming15",
+  },
+  {
+    id: 9,
+    code: "BOOKS30",
+    title: "30% Off Books",
+    description: "Save 30% on all books",
+    brandName: "BookWorld",
+    brandLogo: "/placeholder.svg?height=100&width=100",
+    expiryDate: "2025-06-25",
+    usedCount: 543,
+    slug: "bookworld-books30",
+  },
+  {
+    id: 10,
+    code: "PET25",
+    title: "25% Off Pet Supplies",
+    description: "Get 25% off on all pet supplies",
+    brandName: "PetCare",
+    brandLogo: "/placeholder.svg?height=100&width=100",
+    expiryDate: "2025-08-10",
+    usedCount: 321,
+    slug: "petcare-pet25",
+  },
+];
 
 export default function TopCoupons() {
-  const { toast } = useToast()
-  const { t } = useLanguage()
-  const [copiedCodes, setCopiedCodes] = useState<Record<string, boolean>>({})
+  const { toast } = useToast();
+  const { t } = useLanguage();
+  const [copiedCodes, setCopiedCodes] = useState<Record<string, boolean>>({});
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [revealedCodes, setRevealedCodes] = useState<Record<string, boolean>>(
+    {}
+  );
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % coupons.length);
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isMobile]);
+
+  const handleRevealCode = (code: string) => {
+    setRevealedCodes((prev) => ({ ...prev, [code]: true }));
+  };
 
   const handleCopyCode = (code: string) => {
-    navigator.clipboard.writeText(code)
-    setCopiedCodes({ ...copiedCodes, [code]: true })
+    navigator.clipboard.writeText(code);
+    setCopiedCodes({ ...copiedCodes, [code]: true });
     toast({
       title: "Code copied!",
       description: `${code} has been copied to your clipboard.`,
-    })
+    });
 
-    // Reset the copied state after 2 seconds
     setTimeout(() => {
-      setCopiedCodes({ ...copiedCodes, [code]: false })
-    }, 2000)
-  }
+      setCopiedCodes((prev) => ({ ...prev, [code]: false }));
+    }, 2000);
+  };
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
+    const date = new Date(dateString);
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
-    }).format(date)
-  }
+    }).format(date);
+  };
 
   return (
     <section className="space-y-4">
@@ -128,58 +201,147 @@ export default function TopCoupons() {
           </Link>
         </Button>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {coupons.map((coupon) => (
-          <div key={coupon.id} className="coupon-card">
-            <div className="flex items-center gap-3 border-b p-4">
-              <div className="flex-shrink-0">
-                <Image
-                  src={coupon.brandLogo || "/placeholder.svg"}
-                  alt={coupon.brandName}
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 rounded-full object-contain"
-                />
-              </div>
-              <div className="flex-1 overflow-hidden">
-                <h3 className="truncate font-medium">{coupon.title}</h3>
-                <p className="text-sm text-muted-foreground">{coupon.brandName}</p>
+
+      <div className="relative">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {isMobile ? (
+            <div className="overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {coupons.map((coupon) => (
+                  <div
+                    key={coupon.id}
+                    className="w-full flex-shrink-0 coupon-card border rounded-lg overflow-hidden shadow-sm bg-background relative"
+                  >
+                    {/* Top Part: Brand Image */}
+                    <div className="bg-muted p-6 flex justify-center items-center">
+                      <Image
+                        src={coupon.brandLogo || "/placeholder.svg"}
+                        alt={coupon.brandName}
+                        width={64}
+                        height={64}
+                        className="h-16 w-16 rounded-full object-contain"
+                      />
+                    </div>
+
+                    {/* Bottom Part: Content */}
+                    <div className="p-4 pb-16 min-h-[120px] flex flex-col justify-center">
+                      <div className="text-center">
+                        <h3 className="font-semibold text-lg line-clamp-1">
+                          {coupon.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-1">
+                          {coupon.brandName}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Fixed Button at Bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-background border-t">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => handleRevealCode(coupon.code)}
+                        >
+                          <span className="text-center">
+                            {revealedCodes[coupon.code]
+                              ? coupon.code
+                              : "Click to reveal code"}
+                          </span>
+                        </Button>
+                        {revealedCodes[coupon.code] && (
+                          <div
+                            className="h-8 w-8 p-0 flex items-center justify-center rounded-md hover:bg-muted cursor-pointer"
+                            onClick={() => handleCopyCode(coupon.code)}
+                          >
+                            {copiedCodes[coupon.code] ? (
+                              <Check className="h-4 w-4" />
+                            ) : (
+                              <Copy className="h-4 w-4" />
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="p-4">
-              <p className="mb-4 text-sm text-muted-foreground">{coupon.description}</p>
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs text-muted-foreground">
-                    {t("expires")}: {formatDate(coupon.expiryDate)}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {t("used")}: {coupon.usedCount} {t("times")}
-                  </span>
+          ) : (
+            coupons.map((coupon) => (
+              <div
+                key={coupon.id}
+                className="coupon-card border rounded-lg overflow-hidden shadow-sm bg-background"
+              >
+                {/* Top Part: Brand Image */}
+                <div className="bg-muted p-6 flex justify-center items-center">
+                  <Image
+                    src={coupon.brandLogo || "/placeholder.svg"}
+                    alt={coupon.brandName}
+                    width={64}
+                    height={64}
+                    className="h-16 w-16 rounded-full object-contain"
+                  />
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-1"
-                  onClick={() => handleCopyCode(coupon.code)}
-                >
-                  {copiedCodes[coupon.code] ? (
-                    <>
-                      <Check className="h-4 w-4" />
-                      <span>Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-4 w-4" />
-                      <span>{coupon.code}</span>
-                    </>
-                  )}
-                </Button>
+
+                {/* Bottom Part: Content */}
+                <div className="p-4 space-y-2">
+                  <div>
+                    <h3 className="font-semibold text-base truncate">
+                      {coupon.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {coupon.brandName}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {coupon.description}
+                  </p>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <div>
+                      {t("expires")}: {formatDate(coupon.expiryDate)}
+                    </div>
+                    <div>
+                      {t("used")}: {coupon.usedCount} {t("times")}
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center justify-between w-full group"
+                    onClick={() => handleRevealCode(coupon.code)}
+                  >
+                    <span className="flex-1 text-center">
+                      {revealedCodes[coupon.code]
+                        ? coupon.code
+                        : "Click to reveal code"}
+                    </span>
+                    {revealedCodes[coupon.code] && (
+                      <div
+                        className="h-8 w-8 p-0 flex items-center justify-center rounded-md hover:bg-muted cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCopyCode(coupon.code);
+                        }}
+                      >
+                        {copiedCodes[coupon.code] ? (
+                          <Check className="h-4 w-4" />
+                        ) : (
+                          <Copy className="h-4 w-4" />
+                        )}
+                      </div>
+                    )}
+                  </Button>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))
+          )}
+        </div>
       </div>
     </section>
-  )
+  );
 }

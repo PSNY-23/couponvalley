@@ -21,7 +21,7 @@ type Banner = {
 const banners: Banner[] = [
   {
     id: 1,
-    image: "/placeholder.svg?height=400&width=1200",
+    image: "/images/electronics.jpg", // Use real images placed in public/images/
     title: "50% Off Electronics",
     description: "Get amazing deals on the latest electronics",
     link: "/stores/electronics-store",
@@ -30,7 +30,7 @@ const banners: Banner[] = [
   },
   {
     id: 2,
-    image: "/placeholder.svg?height=400&width=1200",
+    image: "/images/fashion.jpg",
     title: "Summer Fashion Sale",
     description: "Refresh your wardrobe with our summer collection",
     link: "/stores/fashion-brand",
@@ -39,7 +39,7 @@ const banners: Banner[] = [
   },
   {
     id: 3,
-    image: "/placeholder.svg?height=400&width=1200",
+    image: "/images/travel.jpg",
     title: "Travel Discounts",
     description: "Plan your next vacation with exclusive discounts",
     link: "/stores/travel-agency",
@@ -60,62 +60,51 @@ export default function BannerSlider() {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative overflow-hidden rounded-xl">
+    <div className="relative overflow-hidden rounded-xl shadow-md">
       <div className="relative h-[300px] md:h-[400px]">
         {banners.map((banner, index) => (
           <div
             key={banner.id}
             className={cn(
-              "banner-slide absolute inset-0 transition-opacity duration-500",
+              "absolute inset-0 transition-opacity duration-700 ease-in-out",
               index === currentSlide
                 ? "opacity-100"
                 : "opacity-0 pointer-events-none"
             )}
           >
             <Image
-              src={banner.image || "/placeholder.svg"}
+              src={banner.image}
               alt={banner.title}
               fill
-              className="object-cover brightness-75"
+              className="object-cover"
               priority={index === 0}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-transparent">
-              <div className="container flex h-full flex-col justify-center p-6 text-white">
-                <div className="max-w-md space-y-4">
-                  <h2 className="text-2xl font-bold md:text-4xl text-white drop-shadow-lg">
-                    {banner.title}
-                  </h2>
-                  <p className="text-sm md:text-base text-white/90">
-                    {banner.description}
-                  </p>
-                  <div className="flex flex-col gap-2 sm:flex-row">
-                    {banner.couponCode ? (
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="border-white bg-white/20 text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm"
-                      >
-                        <Link href={banner.link}>
-                          {t("copyCode")}: {banner.couponCode}
-                        </Link>
-                      </Button>
-                    ) : (
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="border-white bg-white/20 text-white hover:bg-white hover:text-blue-600 backdrop-blur-sm"
-                      >
-                        <Link href={banner.link}>{t("getOffer")}</Link>
-                      </Button>
-                    )}
-                  </div>
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+            <div className="absolute inset-0 flex flex-col justify-center px-6 text-white md:px-12">
+              <div className="max-w-xl space-y-4">
+                <h2 className="text-3xl font-bold md:text-5xl drop-shadow-lg">
+                  {banner.title}
+                </h2>
+                <p className="text-sm md:text-lg text-white/90 drop-shadow-md">
+                  {banner.description}
+                </p>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="border-white bg-white/20 text-white hover:bg-white hover:text-blue-600 backdrop-blur"
+                  >
+                    <Link href={banner.link}>
+                      {banner.couponCode
+                        ? `${t("copyCode")}: ${banner.couponCode}`
+                        : t("getOffer")}
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -123,27 +112,30 @@ export default function BannerSlider() {
         ))}
       </div>
 
+      {/* Left Arrow */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 text-foreground hover:bg-background/90"
+        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 text-foreground hover:bg-background/90"
         onClick={prevSlide}
       >
         <ChevronLeft className="h-6 w-6" />
         <span className="sr-only">Previous slide</span>
       </Button>
 
+      {/* Right Arrow */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 text-foreground hover:bg-background/90"
+        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 text-foreground hover:bg-background/90"
         onClick={nextSlide}
       >
         <ChevronRight className="h-6 w-6" />
         <span className="sr-only">Next slide</span>
       </Button>
 
-      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
         {banners.map((_, index) => (
           <button
             key={index}
