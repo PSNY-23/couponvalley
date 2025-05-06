@@ -7,6 +7,7 @@ import TrendingCategories from "@/components/trending-categories";
 import PopularOffers from "@/components/popular-offers";
 import { Skeleton } from "@/components/ui/skeleton";
 import LogoCloud from "@/components/LogoCloud/LogoCloud";
+import PaymentOptionsWithRealLogos from "@/components/PaymentOptionsWithRealLogos";
 
 export default function Home() {
   return (
@@ -25,16 +26,20 @@ export default function Home() {
         <BrandSection />
       </Suspense>
 
-      <Suspense fallback={<TopShopsSkeleton />}>
-        <TopShops />
-      </Suspense>
-
       <Suspense fallback={<TrendingCategoriesSkeleton />}>
         <TrendingCategories />
       </Suspense>
 
       <Suspense fallback={<PopularOffersSkeleton />}>
         <PopularOffers />
+      </Suspense>
+
+      <Suspense fallback={<TopShopsSkeleton />}>
+        <TopShops />
+      </Suspense>
+
+      <Suspense fallback={<PaymentOptionsWithRealLogosSkeleton />}>
+        <PaymentOptionsWithRealLogos />
       </Suspense>
     </div>
   );
@@ -126,6 +131,29 @@ function TrendingCategoriesSkeleton() {
 }
 
 function PopularOffersSkeleton() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <Skeleton className="h-8 w-48" />
+      </div>
+      <div className="flex gap-2 border-b">
+        {Array(3)
+          .fill(null)
+          .map((_, i) => (
+            <Skeleton key={i} className="h-10 w-40" />
+          ))}
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {Array(6)
+          .fill(null)
+          .map((_, i) => (
+            <Skeleton key={i} className="h-40 w-full rounded-lg" />
+          ))}
+      </div>
+    </div>
+  );
+}
+function PaymentOptionsWithRealLogosSkeleton() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">

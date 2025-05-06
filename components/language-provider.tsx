@@ -1,15 +1,20 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { createContext, useContext, useState, useEffect } from "react"
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
 
-type Language = "en" | "es" | "fr" | "ar"
+type Language = "en" | "es" | "fr" | "ar";
 
 type Translations = {
   [key: string]: {
-    [key: string]: string
-  }
-}
+    [key: string]: string;
+  };
+};
 
 const translations: Translations = {
   en: {
@@ -126,7 +131,8 @@ const translations: Translations = {
     subscribeText: "Abonnez-vous pour recevoir les dernières offres",
     subscribe: "S'abonner",
     emailPlaceholder: "Entrez votre email",
-    footerText: "Découvrez les meilleures offres et coupons des meilleures marques",
+    footerText:
+      "Découvrez les meilleures offres et coupons des meilleures marques",
     electronics: "Électronique",
     fashion: "Mode",
     travel: "Voyages",
@@ -176,50 +182,56 @@ const translations: Translations = {
     home: "منزل",
     copyright: "© 2025 كوبونيك. جميع الحقوق محفوظة.",
   },
-}
+};
 
 type LanguageContextType = {
-  language: Language
-  setLanguage: (lang: Language) => void
-  t: (key: string) => string
-  isRTL: boolean
-}
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+  isRTL: boolean;
+};
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en")
-  const [isRTL, setIsRTL] = useState(false)
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>("en");
+  const [isRTL, setIsRTL] = useState(false);
 
   useEffect(() => {
     // Check browser language
-    const browserLang = navigator.language.split("-")[0]
-    if (browserLang === "es") setLanguage("es")
-    else if (browserLang === "fr") setLanguage("fr")
-    else if (browserLang === "ar") setLanguage("ar")
+    const browserLang = navigator.language.split("-")[0];
+    if (browserLang === "es") setLanguage("es");
+    else if (browserLang === "fr") setLanguage("fr");
+    else if (browserLang === "ar") setLanguage("ar");
 
     // Set RTL for Arabic
-    setIsRTL(language === "ar")
+    setIsRTL(language === "ar");
 
     // Add RTL class to html element if needed
     if (language === "ar") {
-      document.documentElement.classList.add("rtl")
+      document.documentElement.classList.add("rtl");
     } else {
-      document.documentElement.classList.remove("rtl")
+      document.documentElement.classList.remove("rtl");
     }
-  }, [language])
+  }, [language]);
 
   const t = (key: string): string => {
-    return translations[language][key] || key
-  }
+    return translations[language][key] || key;
+  };
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t, isRTL }}>{children}</LanguageContext.Provider>
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t, isRTL }}>
+      {children}
+    </LanguageContext.Provider>
+  );
 }
 
 export function useLanguage() {
-  const context = useContext(LanguageContext)
+  const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider")
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
-  return context
+  return context;
 }

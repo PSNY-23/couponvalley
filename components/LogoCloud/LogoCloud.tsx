@@ -36,14 +36,14 @@ interface LogoProps {
   height?: number;
 }
 
-const Logo = ({ src, alt, width = 30, height = 30 }: LogoProps) => (
+const Logo = ({ src, alt }: LogoProps) => (
   <div className="flex h-[100px] w-[100px] items-center justify-center rounded-xl bg-white/5 p-3 shadow-lg backdrop-blur-md">
     <Image
       src={src}
       alt={alt}
-      width={width}
-      height={height}
-      className="object-contain"
+      width={100}
+      height={100}
+      className="h-full w-full object-contain"
     />
   </div>
 );
@@ -67,7 +67,7 @@ const LogoList = () => (
 
 export default function LogoCloud() {
   return (
-    <div className="lg:mt-22 relative z-40 mx-auto mt-[50px] flex max-w-7xl flex-col gap-0 text-black">
+    <div className="lg:mt-22 relative z-40 mx-auto mt-[50px] flex max-w-full flex-col gap-0 text-black">
       {/* Row 1 - normal scroll */}
       <div
         className="relative flex w-full overflow-hidden"

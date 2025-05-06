@@ -55,26 +55,31 @@ export default function CouponCard({ coupon }: Props) {
 
   return (
     <div className="coupon-card border rounded-lg overflow-hidden shadow-sm bg-background relative">
-      <div className="bg-muted p-6 flex justify-center items-center">
+      <div className="absolute top-2 left-2 bg-white text-black px-2 py-1 rounded-md text-xs font-semibold z-10">
+        🔥 15% OFF
+      </div>
+      <div className="bg-muted p-6 flex justify-center items-center bg-blue-500">
         <Image
           src={coupon.brandLogo || "/placeholder.svg"}
           alt={coupon.brandName}
           width={64}
           height={64}
-          className="h-16 w-16 rounded-full object-contain"
+          className="h-20 w-32 object-contain"
         />
       </div>
 
       <div className="p-4 space-y-2 mb-16">
         <div>
-          <h3 className="font-semibold text-base truncate">{coupon.title}</h3>
-          <p className="text-sm text-muted-foreground">{coupon.brandName}</p>
+          <h3 className="font-semibold text-base truncate">
+            {coupon.brandName}
+          </h3>
+          <p className="text-sm text-muted-foreground">{coupon.title}</p>
         </div>
-        <p className="text-sm text-muted-foreground">{coupon.description}</p>
-        <div className="text-xs text-muted-foreground space-y-1">
+        {/* <p className="text-sm text-muted-foreground h-2"></p> */}
+        {/* <div className="text-xs text-muted-foreground space-y-1">
           <div>Expires: {formatDate(coupon.expiryDate)}</div>
           <div>Used: {coupon.usedCount} times</div>
-        </div>
+        </div> */}
 
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-background border-t">
           <div className="flex items-center gap-2">

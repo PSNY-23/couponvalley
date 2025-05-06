@@ -112,7 +112,7 @@ export default function TopShops() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">{t("topShops")}</h2>
+        <h2 className="text-xl font-bold">{t("topShops")}</h2>
         <Button variant="ghost" size="sm" asChild>
           <Link href="/stores" className="flex items-center gap-1">
             {t("viewAll")}
