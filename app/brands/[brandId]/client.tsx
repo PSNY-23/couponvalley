@@ -164,7 +164,7 @@ export function BrandPageClient({ brand }: BrandPageClientProps) {
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row gap-6">
           {/* Sidebar - hidden on mobile */}
           <aside className="hidden md:block w-80 shrink-0">
-            <div className="sticky top-4 space-y-6">
+            <div className=" top-4 space-y-6">
               {/* Today's top offers */}
               <div className="relative overflow-hidden rounded-xl border border-[#042558]/10 bg-white">
                 <div className="relative p-4">
