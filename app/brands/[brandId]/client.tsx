@@ -453,7 +453,7 @@ export function BrandPageClient({ brand }: BrandPageClientProps) {
               {displayedCoupons.map((coupon, index) => (
                 <div
                   key={index}
-                  className="relative overflow-hidden rounded-xl border border-[#042558]/10 bg-white transition-all duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-2xl hover:border-[#042558]/40 group"
+                  className="relative overflow-hidden rounded-xl border border-[#042558]/10 bg-white transition-all duration-300 ease-in-out hover:border-[#042558]/40 group"
                 >
                   {/* Gradient overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-[#042558]/0 via-[#042558]/10 to-[#042558]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
