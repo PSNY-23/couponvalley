@@ -28,6 +28,13 @@ export interface Brand {
     date: string;
     description: string;
     details: string | null;
+    savings?: string;
+    minimumPurchase?: number;
+    verified?: boolean;
+    exclusive?: boolean;
+    terms?: string;
+    expires?: string;
+    usedCount?: number;
   }[];
   faqs: {
     question: string;
@@ -83,6 +90,196 @@ export const brands: Brand[] = [
       },
       {
         date: "Verified 2 days ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
+        description: "20% off Electronics with code TECH20",
+        details: "Exclusions apply",
+      },
+      {
+        date: "Verified Today",
+        description: "Free Shipping on Orders $35+",
+        details: "Standard shipping only",
+      },
+      {
+        date: "Verified 1 day ago",
         description: "20% off Electronics with code TECH20",
         details: "Exclusions apply",
       },
