@@ -12,8 +12,8 @@ export default function NotFound() {
           Sorry, we couldn't find the brand you're looking for. It may have been
           removed or doesn't exist.
         </p>
-        <Link href="/brands">
-          <Button>View All Brands</Button>
+        <Link href="/stores">
+          <Button>View All Stores</Button>
         </Link>
       </div>
     </div>

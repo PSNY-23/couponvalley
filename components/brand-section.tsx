@@ -31,13 +31,13 @@ const brands: Brand[] = [
   { id: 12, name: "Lenovo", slug: "lenovo", icon: brandLogo },
 ];
 
-export default function BrandSection() {
+export default function StoreSection() {
   const { t } = useLanguage();
 
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">{"Top Brands"}</h2>
+        <h2 className="text-xl font-bold">{"Top Stores"}</h2>
         <Button variant="ghost" size="sm" asChild>
           <Link href="/stores" className="flex items-center gap-1">
             {t("viewAll")}

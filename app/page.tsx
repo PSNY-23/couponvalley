@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import BannerSlider from "@/components/banner-slider";
-import BrandSection from "@/components/brand-section";
+import StoreSection from "@/components/brand-section";
 import TopCoupons from "@/components/top-coupons";
 import TopShops from "@/components/top-shops";
 import TrendingCategories from "@/components/trending-categories";
@@ -22,8 +22,8 @@ export default function Home() {
         <TopCoupons />
       </Suspense>
 
-      <Suspense fallback={<BrandSectionSkeleton />}>
-        <BrandSection />
+      <Suspense fallback={<StoreSectionSkeleton />}>
+        <StoreSection />
       </Suspense>
 
       <Suspense fallback={<TrendingCategoriesSkeleton />}>
@@ -58,7 +58,7 @@ function BannerSkeleton() {
   );
 }
 
-function BrandSectionSkeleton() {
+function StoreSectionSkeleton() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">

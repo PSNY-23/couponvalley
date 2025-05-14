@@ -1,6 +1,6 @@
-import type React from "react"
-import { Suspense } from "react"
-import Link from "next/link"
+import type React from "react";
+import { Suspense } from "react";
+import Link from "next/link";
 import {
   Laptop,
   ShoppingBag,
@@ -14,17 +14,17 @@ import {
   Dumbbell,
   Baby,
   Car,
-} from "lucide-react"
-import { Skeleton } from "@/components/ui/skeleton"
+} from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Category = {
-  id: number
-  name: string
-  icon: React.ReactNode
-  slug: string
-  count: number
-  description: string
-}
+  id: number;
+  name: string;
+  icon: React.ReactNode;
+  slug: string;
+  count: number;
+  description: string;
+};
 
 const categories: Category[] = [
   {
@@ -33,7 +33,8 @@ const categories: Category[] = [
     icon: <Laptop className="h-8 w-8" />,
     slug: "electronics",
     count: 245,
-    description: "Deals on laptops, smartphones, TVs, and other electronic devices.",
+    description:
+      "Deals on laptops, smartphones, TVs, and other electronic devices.",
   },
   {
     id: 2,
@@ -49,7 +50,8 @@ const categories: Category[] = [
     icon: <Plane className="h-8 w-8" />,
     slug: "travel",
     count: 156,
-    description: "Savings on flights, hotels, vacation packages, and travel gear.",
+    description:
+      "Savings on flights, hotels, vacation packages, and travel gear.",
   },
   {
     id: 4,
@@ -65,7 +67,8 @@ const categories: Category[] = [
     icon: <Sparkles className="h-8 w-8" />,
     slug: "beauty",
     count: 98,
-    description: "Deals on makeup, skincare, health products, and wellness items.",
+    description:
+      "Deals on makeup, skincare, health products, and wellness items.",
   },
   {
     id: 6,
@@ -73,7 +76,8 @@ const categories: Category[] = [
     icon: <Home className="h-8 w-8" />,
     slug: "home",
     count: 76,
-    description: "Discounts on furniture, decor, appliances, and garden supplies.",
+    description:
+      "Discounts on furniture, decor, appliances, and garden supplies.",
   },
   {
     id: 7,
@@ -81,7 +85,8 @@ const categories: Category[] = [
     icon: <Gamepad className="h-8 w-8" />,
     slug: "gaming",
     count: 65,
-    description: "Offers on video games, consoles, accessories, and gaming gear.",
+    description:
+      "Offers on video games, consoles, accessories, and gaming gear.",
   },
   {
     id: 8,
@@ -89,7 +94,8 @@ const categories: Category[] = [
     icon: <Gift className="h-8 w-8" />,
     slug: "gifts",
     count: 54,
-    description: "Savings on gifts, flowers, personalized items, and gift cards.",
+    description:
+      "Savings on gifts, flowers, personalized items, and gift cards.",
   },
   {
     id: 9,
@@ -123,7 +129,7 @@ const categories: Category[] = [
     count: 27,
     description: "Savings on auto parts, accessories, services, and rentals.",
   },
-]
+];
 
 export default function CategoriesPage() {
   return (
@@ -131,8 +137,9 @@ export default function CategoriesPage() {
       <div className="mb-8 text-center">
         <h1 className="mb-2 text-3xl font-bold md:text-4xl">Categories</h1>
         <p className="mx-auto max-w-2xl text-muted-foreground">
-          Browse deals and coupons by category to find exactly what you're looking for. We have offers across a wide
-          range of products and services.
+          Browse deals and coupons by category to find exactly what you're
+          looking for. We have offers across a wide range of products and
+          services.
         </p>
       </div>
 
@@ -147,15 +154,21 @@ export default function CategoriesPage() {
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                 {category.icon}
               </div>
-              <h3 className="mb-2 text-lg font-medium group-hover:text-primary">{category.name}</h3>
-              <p className="mb-2 text-sm text-muted-foreground">{category.description}</p>
-              <p className="mt-auto text-sm font-medium">{category.count} active deals</p>
+              <h3 className="mb-2 text-lg font-medium group-hover:text-primary">
+                {category.name}
+              </h3>
+              <p className="mb-2 text-sm text-muted-foreground">
+                {category.description}
+              </p>
+              <p className="mt-auto text-sm font-medium">
+                {category.count} active deals
+              </p>
             </Link>
           ))}
         </div>
       </Suspense>
     </div>
-  )
+  );
 }
 
 function CategoriesSkeleton() {
@@ -164,7 +177,10 @@ function CategoriesSkeleton() {
       {Array(12)
         .fill(null)
         .map((_, i) => (
-          <div key={i} className="flex flex-col rounded-lg border bg-card p-6 shadow-sm">
+          <div
+            key={i}
+            className="flex flex-col rounded-lg border bg-card p-6 shadow-sm"
+          >
             <Skeleton className="mb-4 h-16 w-16 rounded-full" />
             <Skeleton className="mb-2 h-6 w-32" />
             <Skeleton className="mb-1 h-4 w-full" />
@@ -173,5 +189,5 @@ function CategoriesSkeleton() {
           </div>
         ))}
     </div>
-  )
+  );
 }
