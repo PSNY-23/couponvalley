@@ -83,24 +83,21 @@ export default function Header() {
         isScrolled && "shadow-sm"
       )}
     >
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-6">
+      <div className='container flex h-16 items-center justify-between'>
+        <div className='flex items-center gap-6'>
           <Sheet>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" aria-label="Menu">
-                <Menu className="h-5 w-5" />
+            <SheetTrigger asChild className='lg:hidden'>
+              <Button variant='ghost' size='icon' aria-label='Menu'>
+                <Menu className='h-5 w-5' />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <nav className="grid gap-6 text-lg font-medium">
-                <Link
-                  href="/"
-                  className="flex items-center gap-2 text-lg font-bold"
-                >
-                  <ShoppingBag className="h-5 w-5" />
+            <SheetContent side='left' className='w-[300px] sm:w-[400px]'>
+              <nav className='grid gap-6 text-lg font-medium'>
+                <Link href='/' className='flex items-center gap-2 text-lg font-bold'>
+                  <ShoppingBag className='h-5 w-5' />
                   Couponic
                 </Link>
-                <div className="grid gap-3">
+                <div className='grid gap-3'>
                   {navItems.map((item) => (
                     <Link
                       key={item.name}
@@ -114,14 +111,14 @@ export default function Header() {
                     </Link>
                   ))}
                 </div>
-                <div className="grid gap-2">
-                  <div className="font-semibold">{t("categories")}</div>
-                  <div className="grid grid-cols-2 gap-2">
+                <div className='grid gap-2'>
+                  <div className='font-semibold'>{t("categories")}</div>
+                  <div className='grid grid-cols-2 gap-2'>
                     {categories.map((category) => (
                       <Link
                         key={category.name}
                         href={category.href}
-                        className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                        className='flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground'
                       >
                         <span>{category.icon}</span>
                         <span>{category.name}</span>
@@ -132,27 +129,25 @@ export default function Header() {
               </nav>
             </SheetContent>
           </Sheet>
-          <Link href="/" className="flex items-center gap-2 font-bold">
-            <ShoppingBag className="h-5 w-5" />
-            <span className="hidden sm:inline-block">Couponic</span>
+          <Link href='/' className='flex items-center gap-2 font-bold'>
+            <ShoppingBag className='h-5 w-5' />
+            <span className='hidden sm:inline-block'>Couponic</span>
           </Link>
-          <NavigationMenu className="hidden lg:flex">
+          <NavigationMenu className='hidden lg:flex'>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>{t("topStores")}</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
                     {stores.map((store) => (
                       <li key={store.name}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={store.href}
-                            className="flex select-none items-center gap-3 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className='flex select-none items-center gap-3 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
                           >
-                            <span className="text-xl">{store.icon}</span>
-                            <div className="text-sm font-medium leading-none">
-                              {store.name}
-                            </div>
+                            <span className='text-xl'>{store.icon}</span>
+                            <div className='text-sm font-medium leading-none'>{store.name}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -163,18 +158,16 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>{t("categories")}</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
                     {categories.map((category) => (
                       <li key={category.name}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={category.href}
-                            className="flex select-none items-center gap-2 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className='flex select-none items-center gap-2 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
                           >
-                            <span className="text-xl">{category.icon}</span>
-                            <div className="text-sm font-medium leading-none">
-                              {category.name}
-                            </div>
+                            <span className='text-xl'>{category.icon}</span>
+                            <div className='text-sm font-medium leading-none'>{category.name}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -183,58 +176,49 @@ export default function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/offers" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {t("bestOffers")}
-                  </NavigationMenuLink>
+                <Link href='/offers' legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>{t("bestOffers")}</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/blog" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {t("blog")}
-                  </NavigationMenuLink>
+                <Link href='/blog' legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>{t("blog")}</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className='flex items-center gap-4'>
           {isSearchOpen ? (
-            <form
-              onSubmit={handleSearch}
-              className="relative flex w-full items-center md:w-auto"
-            >
+            <form onSubmit={handleSearch} className='relative flex w-full items-center md:w-auto'>
               <Input
-                type="search"
+                type='search'
                 placeholder={t("searchPlaceholder")}
-                className="w-full md:w-[300px]"
+                className='w-full md:w-[300px]'
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="absolute right-0"
+                type='button'
+                variant='ghost'
+                size='icon'
+                className='absolute right-0'
                 onClick={() => setIsSearchOpen(false)}
               >
-                <X className="h-4 w-4" />
+                <X className='h-4 w-4' />
               </Button>
             </form>
           ) : (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsSearchOpen(true)}
-              aria-label="Search"
-            >
-              <Search className="h-5 w-5" />
+            <Button variant='ghost' size='icon' onClick={() => setIsSearchOpen(true)} aria-label='Search'>
+              <Search className='h-5 w-5' />
             </Button>
           )}
           <LanguageToggle />
           <ThemeToggle />
+          <Button asChild>
+            <Link href='/sign-in'>Sign In</Link>
+          </Button>
         </div>
       </div>
     </header>
