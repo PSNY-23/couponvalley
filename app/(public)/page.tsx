@@ -9,7 +9,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import LogoCloud from "@/components/LogoCloud/LogoCloud";
 import PaymentOptionsWithRealLogos from "@/components/PaymentOptionsWithRealLogos";
 
-export default function Home() {
+
+
+export default async function Home() {
+  
   return (
     <div className="container space-y-12 py-8 md:py-12">
       <Suspense fallback={<BannerSkeleton />}>

@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 
 
 export const GithubAuthButton = () => (
-  <Button className="w-full " variant="outline" onClick={() => signIn("google", { redirectTo: "/dashboard" })}>
+  <Button className="w-full " variant="outline" onClick={() => signIn("github", { redirectTo: "/dashboard" })}>
     <FaGithub className="mr-2 h-5 w-5" /> Continue with GitHub
   </Button>
 );

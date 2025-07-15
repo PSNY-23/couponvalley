@@ -7,6 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
  
+ //Authentication related schema, never mess with it
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -33,10 +34,8 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([provider, providerAccountId])
@@ -59,4 +58,110 @@ model VerificationToken {
  
   @@id([identifier, token])
 }
- 
+
+// Never mess with the above schema, that's for authentication only
+//Below is the app stores related schema
+
+model Store {
+  id               String            @id @default(uuid())
+  name             String
+  logo             String
+  description      String
+  rating           Float
+  reviewCount      Int
+  phone            String
+  address          String
+  topOffers        String[]
+  featuredArticles FeaturedArticle[]
+  coupons          StoreCoupon[]
+  faqs             FAQ[]
+  categories       Category[]
+  stats            Stats?
+  contentWriter    ContentWriter?
+  createdAt        DateTime          @default(now())
+  updatedAT        DateTime          @updatedAt
+}
+
+model Stats {
+  id                String   @id @default(uuid())
+  totalOffers       Int
+  couponCodes       Int
+  inStoreCoupons    Int
+  freeShippingDeals Int
+  storeId           String   @unique
+  store             Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAT         DateTime @updatedAt
+}
+
+model ContentWriter {
+  id       String  @id @default(uuid())
+  name     String
+  role     String
+  bio      String
+  storeId  String  @unique
+  store    Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAT DateTime @updatedAt
+}
+
+model FeaturedArticle {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  author      String
+  storeId     String
+  store       Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAT   DateTime @updatedAt
+}
+
+model StoreCoupon {
+  id              String   @id @default(uuid())
+
+  // Coupon-like fields
+  code            String?
+  title           String?
+  brandName       String?
+  brandLogo       Json?
+  slug            String?
+
+  // Store coupon fields
+  date            String
+  description     String
+  savings         String?
+  minimumPurchase Int?
+  verified        Boolean?
+  exclusive       Boolean?
+  terms           String?
+  expires         String?
+  usedCount       Int?
+  storeId         String
+  store           Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAT       DateTime @updatedAt
+}
+
+model FAQ {
+  id        String  @id @default(uuid())
+  question  String
+  answer    String
+  storeId   String
+  store     Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAT DateTime @updatedAt
+}
+
+model Category {
+  id        String  @id @default(uuid())
+  title     String  @unique
+  storeId   String
+  store     Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAT DateTime @updatedAt
+}
+
+
+
